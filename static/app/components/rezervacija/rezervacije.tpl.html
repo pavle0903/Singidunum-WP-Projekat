@@ -1,0 +1,29 @@
+<div class="row">
+    
+   
+     <div class="col-12">
+        <table class="table">
+            <thead>
+                <tr>
+                    <th>Redni broj</th>
+                    <!-- <th>Korisnik</th> -->
+                    <th>Datum dolaska</th>
+                    <th>Datum odlaska</th>
+                    <th>Akcija</th>
+
+                </tr>
+            </thead>
+            <tbody>
+
+                <tr ng-repeat="s in rctrl.rezervacije">
+
+                    <td>{{$index+1}}.</td>
+                    <!-- <td>{{s["korisnici_id"]}}</td> -->
+                    <td>{{s["datumDolaska"]}}</td>
+                    <td>{{s["datumOdlaska"]}}</td>
+                    <td><button class="btn btn-danger" ng-click="rctrl.ukloniRezervaciju(s['id'])">Otkazi</button></td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+</div>

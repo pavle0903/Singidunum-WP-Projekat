@@ -1,0 +1,76 @@
+<!-- <div class="row">
+    
+   
+     <div class="col-12">
+        <table class="table">
+            <thead>
+                <tr>
+                    <th>Redni broj</th>
+                    <th>Naziv</th>
+                    <th>Opis</th>
+                    <th>Raspolozivost</th>
+                    <th>Kategorija</th>
+                    <th>Cena</th>
+                    <th>Akcije</th>
+                </tr>
+            </thead>
+            <tbody>
+
+                <tr ng-repeat="s in sctrl.smestaji">
+
+                    <td>{{$index+1}}.</td>
+
+                    <td><a ui-sref="smestaj({id: s['id']})">{{s["naziv"]}}</a></td>
+                    <td>{{s["opis"]}}</td>
+                    <td>{{s["raspolozivost"]}}</td>
+                    <td>{{s["kategorija"]}}</td>
+                    <td>{{s["cena"]}}</td>
+                    <td><button class="btn btn-danger" ng-click="sctrl.ukloniSmestaj(s['id'])">Ukloni</button></td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+</div> -->
+
+
+<!-- <div class="card mb-3" style="max-width: 540px;" ng-repeat="s in sctrl.smestaji">
+    <div class="row no-gutters">
+        <div class="col-md-4">
+        <img src="https://m-living.vecernji.hr/media/img/6c/be/b35976317a832d4d5506.jpeg" class="card-img" alt="...">
+        </div>
+        <div class="col-md-8">
+        <div class="card-body">
+            <h5 class="card-title">{{s["naziv"]}}</h5>
+            <p class="card-text">{{s["opis"]}}</p>
+            <p class="card-text"><small class="text-muted">Last updated 3 mins ago</small></p>
+        </div>
+        </div>
+    </div>
+    </div> -->        
+
+    <!-- LOADASH chunk -->
+
+<!-- <div class="row row-cols-1 row-cols-md-3">
+    <div class="col mb-4" ng-repeat="s in sctrl.smestaji"> 
+        <div class="card">
+            <img src="https://m-living.vecernji.hr/media/img/6c/be/b35976317a832d4d5506.jpeg"
+                 class="card-img-top" alt="...">
+            <div class="card-body">
+                <h5 class="card-title">{{s["naziv"]}}</h5>
+                <p class="card-text">{{s["opis"]}}</p>
+            </div>
+        </div>
+    </div>
+</div> -->
+
+    <div class="row row-cols-1 row-cols-md-3" ng-controller="loginCtrl as lctrl">
+        <div style="width: 33%;" class="card" ng-repeat="s in sctrl.smestaji">
+          <img src="https://m-living.vecernji.hr/media/img/6c/be/b35976317a832d4d5506.jpeg" class="card-img-top" alt="...">
+          <div class="card-body">
+            <h5 class="card-title">{{s["naziv"]}}</h5>
+            <p class="card-text"><a ui-sref="rezervacija({id: s.id})">Klik</a> za detaljan opis sobe</p>
+            <button ng-if="lctrl.statusAdmina == 'ne'" class="btn btn-primary" ui-sref="rezervacija({id: s.id})">Rezervisi</button>
+            <button ng-if="lctrl.statusAdmina == 'da'" class="btn btn-danger" ng-click="sctrl.ukloniSmestaj(s.id)">Obrisi</button>
+            <button ng-if="lctrl.statusAdmina == 'da'" class="btn btn-dark" ui-sref="smestaj({id: s['id']})">Izmeni</button>
+        </div>
+        </div>

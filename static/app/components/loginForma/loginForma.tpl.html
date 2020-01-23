@@ -1,0 +1,55 @@
+<style>
+body{background-image:url("https://www.hotelpark.me/wp-content/plugins/minimal-coming-soon-maintenance-mode/framework/public/img/mountain-bg.jpg");
+background-repeat: no-repeat;
+  background-size: 1600px 800px;
+}
+</style>
+    <!-- <center><div class="row">
+        <div class="col-12">
+            <form ng-if="lctrl.status != 'prijavljen'" ng-submit="lctrl.login()" name="loginForma" style="border: 0.1px rgb(218, 211, 211); border-radius: 25px; width: 300px; background-color: #343a40!important;">
+                <div class="form-group" style="margin-top: 50px;">
+                    <label for="naziv" style="color: white; margin-top: 5px;">Korisničko ime:</label>
+                    <input style="height: 50px; width: 200px;" ng-class="{'is-invalid': loginForma['brojLicne'].$invalid}" type="text"
+                        name="brojLicne" id="brojLicne" class="form-control"
+                        ng-model="lctrl.korisnik.brojLicne" required>
+                </div>
+                <div class="form-group">
+                    <label for="naziv" style="color: white;">Lozinka:</label>
+                    <input style="height: 50px; width: 200px;" ng-class="{'is-invalid': loginForma['lozinka'].$invalid}" type="password" name="lozinka"
+                        id="lozinka" class="form-control" ng-model="lctrl.korisnik.lozinka" required>
+                </div>
+                <div class="form-group">
+                    <input type="submit" value="Prijava" class="btn btn-primary">
+                </div>
+            </form>
+            <button ng-if="lctrl.status == 'prijavljen'" class="btn btn-primary" ng-click="lctrl.logout()">Odjava</button>
+        </div>
+    </div>
+</div>
+</center> -->
+
+<div class="col-md-6 col-md-offset-3" style="background-color: #343a40!important; border-radius: 28px;">
+    <h2 style="color: white;">Login</h2>
+    <form ng-if="lctrl.status != 'prijavljen'" ng-submit="lctrl.login()" name="loginForma">
+        <div class="form-group" ng-class="{ 'has-error': form.username.$dirty && form.username.$error.required }">
+            <label style="color: white;" for="username">Broj licne karte</label>
+            <span class="input-group-addon"><i
+                class="glyphicon glyphicon-user"></i></span><input type="text" name="username" id="username" class="form-control" ng-class="{'is-invalid': loginForma['brojLicne'].$invalid}" type="text"
+            name="brojLicne" id="brojLicne" ng-model="lctrl.korisnik.brojLicne" required />
+            <span ng-show="form.username.$dirty && form.username.$error.required" class="help-block">Broj licne karte is required</span>
+        </div>
+        <div class="form-group" ng-class="{ 'has-error': form.password.$dirty && form.password.$error.required }">
+            <label for="password" style="color: white;">Password</label>
+            <span class="input-group-addon"><i
+                class="glyphicon glyphicon-lock"></i></span><input type="password" name="password" id="password" class="form-control" ng-class="{'is-invalid': loginForma['lozinka'].$invalid}" type="password" name="lozinka"
+            id="lozinka" class="form-control" ng-model="lctrl.korisnik.lozinka" required />
+            <span ng-show="form.password.$dirty && form.password.$error.required" class="help-block">Password is required</span>
+        </div>
+        <div class="form-actions">
+            <button style="margin-bottom: 15px;" type="submit" ng-disabled="form.$invalid || vm.dataLoading" class="btn btn-primary">Login</button>
+            <img ng-if="vm.dataLoading" src="data:image/gif;base64,R0lGODlhEAAQAPIAAP///wAAAMLCwkJCQgAAAGJiYoKCgpKSkiH/C05FVFNDQVBFMi4wAwEAAAAh/hpDcmVhdGVkIHdpdGggYWpheGxvYWQuaW5mbwAh+QQJCgAAACwAAAAAEAAQAAADMwi63P4wyklrE2MIOggZnAdOmGYJRbExwroUmcG2LmDEwnHQLVsYOd2mBzkYDAdKa+dIAAAh+QQJCgAAACwAAAAAEAAQAAADNAi63P5OjCEgG4QMu7DmikRxQlFUYDEZIGBMRVsaqHwctXXf7WEYB4Ag1xjihkMZsiUkKhIAIfkECQoAAAAsAAAAABAAEAAAAzYIujIjK8pByJDMlFYvBoVjHA70GU7xSUJhmKtwHPAKzLO9HMaoKwJZ7Rf8AYPDDzKpZBqfvwQAIfkECQoAAAAsAAAAABAAEAAAAzMIumIlK8oyhpHsnFZfhYumCYUhDAQxRIdhHBGqRoKw0R8DYlJd8z0fMDgsGo/IpHI5TAAAIfkECQoAAAAsAAAAABAAEAAAAzIIunInK0rnZBTwGPNMgQwmdsNgXGJUlIWEuR5oWUIpz8pAEAMe6TwfwyYsGo/IpFKSAAAh+QQJCgAAACwAAAAAEAAQAAADMwi6IMKQORfjdOe82p4wGccc4CEuQradylesojEMBgsUc2G7sDX3lQGBMLAJibufbSlKAAAh+QQJCgAAACwAAAAAEAAQAAADMgi63P7wCRHZnFVdmgHu2nFwlWCI3WGc3TSWhUFGxTAUkGCbtgENBMJAEJsxgMLWzpEAACH5BAkKAAAALAAAAAAQABAAAAMyCLrc/jDKSatlQtScKdceCAjDII7HcQ4EMTCpyrCuUBjCYRgHVtqlAiB1YhiCnlsRkAAAOwAAAAAAAAAAAA==" />
+            <a style="margin-bottom: 15px;" ui-sref="registracija" class="btn btn-link">Register</a>
+        </div>
+    </form>
+    <button ng-if="lctrl.status == 'prijavljen'" class="btn btn-primary" ng-click="lctrl.logout()">Odjava</button>
+</div>

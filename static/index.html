@@ -1,0 +1,111 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Hotel</title>
+    <link rel="stylesheet" href="/styles/bootstrap.min.css">
+    <script src="/js/jquery-3.4.1.min.js"></script>
+    <script src="/js/bootstrap.bundle.min.js"></script>
+    <!-- <script src="/js/ui-bootstrap-tpls-2.5.0.min.js"></script> -->
+    <script src="/js/loadash.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/lodash@4.17.15/lodash.min.js"></script>
+    <!-- Uvezivanje AngularJS biblioteke. -->
+    <script src="js/angular.min.js"></script>
+    <script src="js/angular-ui-router.min.js"></script>
+
+    <script src="//angular-ui.github.io/bootstrap/ui-bootstrap-tpls-2.5.0.js"></script>
+    <script src="//ajax.googleapis.com/ajax/libs/angularjs/1.6.1/angular.js"></script>
+
+
+    <!-- <script src="//ajax.googleapis.com/ajax/libs/angularjs/1.3.13/angular.js"></script> -->
+    <script src="//angular-ui.github.io/bootstrap/ui-bootstrap-tpls-0.13.0.js"></script>
+    <link href="//netdna.bootstrapcdn.com/bootstrap/3.1.1/css/bootstrap.min.css" rel="stylesheet">
+
+    <!-- Uvezivanje skripte glavne aplikacije. -->
+    <script src="app/app.js"></script>
+    <!-- Uvezivanje skripte kontrolera ProizvodCtrl. -->
+    <script src="app/components/smestaji/smestajiCtrl.js"></script>
+    <script src="app/components/smestaj/smestajCtrl.js"></script>
+    <script src="app/components/smestajForma/smestajFormaCtrl.js"></script>
+    <script src="app/components/registracija/registracijaCtrl.js"></script>
+    <script src="app/components/korisnici/korisniciCtrl.js"></script>
+    <script src="app/components/loginForma/loginCtrl.js"></script>
+    <script src="app/components/rezervacija/rezervacijaCtrl.js"></script>
+    <script src="app/components/sveRezervacije/sveRezervacijeCtrl.js"></script>
+
+
+    <script type="text/javascript" src="//rawgit.com/angular/bower-material/master/angular-material.js"></script>
+
+    <link rel="stylesheet" type="text/css" href="//rawgit.com/angular/bower-material/master/angular-material.css" />
+
+    <!-- <script src="//ajax.googleapis.com/ajax/libs/angularjs/1.6.1/angular.js"></script>
+    <script src="//ajax.googleapis.com/ajax/libs/angularjs/1.6.1/angular-animate.js"></script>
+    <script src="//ajax.googleapis.com/ajax/libs/angularjs/1.6.1/angular-sanitize.js"></script>
+    <script src="//angular-ui.github.io/bootstrap/ui-bootstrap-tpls-2.5.0.js"></script>
+    <link href="//netdna.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" rel="stylesheet"> -->
+
+    <link rel="stylesheet" type="text/css"
+        href="//fonts.googleapis.com/css?family=RobotoDraft:300,400,500,700,400italic" />
+</head>
+<!--
+    Da bi aplikacija radila prvo se mora uvezati za neki
+    element dom stabla. U ovom slucaju aplikacija pod nazivom
+    app je uvezana za body element. To znaci da ce sve komponente
+    registrovane u aplikaciji biti dostupne u podelementima body
+    elementa. Uvezivanje aplikacije za element izvrseno je ng-app
+    direktivom kojoj je prosledjen naziv aplikacije.
+-->
+
+<body ng-app="app">
+    <nav class="navbar navbar-dark bg-dark" ng-controller="loginCtrl as lctrl">
+        <a ng-hide="lctrl.status == 'prijavljen'" class="navbar-brand" ui-sref="registracija" ui-sref-active="active">Registruj se</a>
+
+        <!-- <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent"
+            aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
+        </button> -->
+        <div ng-controller="loginCtrl as lctrl" class="collapse navbar-collapse" id="navbarSupportedContent">
+            <ul class="nav nav-tabs">
+                <li class="nav-item">
+                    <a class="nav-link active" data-toggle="tab" ui-sref="smestaji">Smestaj</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" data-toggle="tab" ui-sref="login">Login</a>
+                </li>
+                <li class="nav-item">
+                    <a ng-if="lctrl.status== 'prijavljen' && lctrl.statusAdmina == 'ne'" class="nav-link" ui-sref="rezervacije">Moje
+                        rezervacije</a>
+                    <a ng-if="lctrl.statusAdmina == 'da'" class="nav-link" ui-sref="sveRezervacije">Sve rezervacije</a>
+                </li>
+                <li ng-hide="lctrl.statusAdmina == 'ne'" class="nav-item dropdown show">
+                    <!-- <a class="nav-link dropdown-toggle disabled" data-toggle="dropdown" href="#" role="button" aria-haspopup="true" aria-expanded="true">Ostalo</a> -->
+                    <a class="nav-link dropdown-toggle" data-toggle="dropdown" role="button" href=""
+                        aria-haspopup="true" aria-expanded="true">Ostalo{{k["ime"]}}</a>
+                    <div class="dropdown-menu" x-placement="bottom-start"
+                        style="position: absolute; will-change: transform; top: 0px; left: 0px; transform: translate3d(0px, 39px, 0px);">
+                        <a class="dropdown-item" ui-sref="dodavanjeSmestaja">Dodaj smestaj</a>
+                        <a class="dropdown-item" ui-sref="korisnici">Korisnici</a>
+                        <!-- <div class="dropdown-divider"></div>
+                        <a class="dropdown-item" href="#">Separated link</a>
+                    </div> -->
+                </li>
+            </ul>
+        </div>
+    </nav>
+
+    <div class="container mt-5">
+        <!--
+            Komponenta ui-view predstavlja mesto na kojem ce biti
+            prikazivan sadrzaj na osnovu stanja rutiranja. Ukoliko
+            je stanje aktivno, sablon tog stanja zajedno sa umetnutim
+            kontrolerom ce biti prikazan unutar ovog elementa. Prilikom
+            promene stanja menja se sadrzaj ovog elementa.
+        -->
+        <ui-view></ui-view>
+    </div>
+</body>
+
+</html>

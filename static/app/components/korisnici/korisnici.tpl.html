@@ -1,0 +1,32 @@
+<div class="row">
+    <!--
+        Kontroler se vise ne vezuje pomocu ng-controller direktive.
+        Kontroler ce biti uvezan od strane ui-routera na osnovu
+        konfiguracije stanja.
+    -->
+    <div class="col-12">
+        <table class="table">
+            <thead>
+                <tr>
+                    <th>Redni broj</th>
+                    <th>Ime</th>
+                    <th>Prezime</th>
+                    <th>Broj licne</th>
+                    <th>Akcije</th>
+                </tr>
+            </thead>
+            <tbody>
+
+                <tr ng-repeat="k in kctrl.korisnici">
+
+                    <td>{{$index+1}}.</td>
+
+                    <td><a ui-sref="korisnik({id: k['id']})">{{k["ime"]}}</a></td>
+                    <td>{{k["prezime"]}}</td>
+                    <td>{{k["brojLicne"]}}</td>
+                    <td><button class="btn btn-danger" ng-click="kctrl.ukloniKorisnika(k['id'])">Ukloni</button></td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+</div>

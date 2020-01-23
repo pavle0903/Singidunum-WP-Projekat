@@ -1,0 +1,39 @@
+<div class="row">
+    <div class="col-12">
+
+        <form ng-submit="sctrl.sacuvaj()" name="smestajForma">
+            <div class="form-group">
+                <label for="naziv">Naziv:</label>
+
+                <input ng-class="{'is-invalid': smestajForma['naziv'].$invalid}" type="text" name="naziv" id="naziv"
+                    class="form-control" ng-model="sctrl.noviSmestaj.naziv" required>
+            </div>
+            <div class="form-group">
+                <label for="kategorija">Kategorija:</label>
+
+                <select class="form-control" id="kategorija" name="kategorija"
+                    ng-options="kategorija.id as kategorija.naziv for kategorija in sctrl.kategorije"
+                    ng-model="sctrl.noviSmestaj.kategorija">
+                </select>
+            </div>
+            <div class="form-group">
+                <label for="opis">Opis:</label>
+                <textarea name="opis" id="opis" class="form-control" ng-model="sctrl.noviSmestaj.opis"></textarea>
+            </div>
+            <div class="form-group">
+                <label for="raspolozivost">Raspolozivost:</label>
+                <input ng-class="{'is-invalid': smestajForma['raspolozivost'].$invalid}" type="number" name="raspolozivost"
+                    id="raspolozivost" min="0" class="form-control" ng-model="sctrl.noviSmestaj.raspolozivost" required>
+            </div>
+            <div class="form-group">
+                <label for="cena">Cena:</label>
+                <input ng-class="{'is-invalid': smestajForma['cena'].$invalid}" type="number" name="cena" id="cena"
+                    min="0" class="form-control" ng-model="sctrl.noviSmestaj.cena" required>
+            </div>
+            <div class="form-group">
+                <input type="submit" ng-if="sctrl.noviSmestaj['id']" value="Izmeni smestaj" class="btn btn-primary">
+                <input type="submit" ng-if="!sctrl.noviSmestaj['id']" value="Dodaj smestaj" class="btn btn-primary">
+            </div>
+        </form>
+    </div>
+</div>

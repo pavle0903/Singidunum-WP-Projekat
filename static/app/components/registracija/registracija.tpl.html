@@ -1,0 +1,42 @@
+<style>
+body{
+background-image:url("https://www.hotelpark.me/wp-content/plugins/minimal-coming-soon-maintenance-mode/framework/public/img/mountain-bg.jpg");
+  background-repeat: no-repeat;
+  background-size: 1600px 800px;
+
+}
+
+</style>
+<div class="row">
+    <div class="col-12">
+        <center>
+        <form ng-submit="rctrl.dodajKorisnika()" name="korisnikForma" style="border: 0.1px rgb(218, 211, 211); border-radius: 25px; width: 300px; background-color: #343a40!important;">
+            <div class="form-group" style="margin-top: 50px;">
+                <label for="ime" style="color: white; margin-top: 5px;">Ime:</label>
+
+                <input style="height: 50px; width: 200px;" ng-class="{'is-invalid': korisnikForma['ime'].$invalid}" type="text" name="ime" id="ime"
+                    class="form-control" ng-model="rctrl.noviKorisnik.ime" required>
+            </div>
+            <div class="form-group">
+                <label for="prezime" style="color: white;">Prezime:</label>
+
+                <input style="height: 50px; width: 200px;" ng-class="{'is-invalid': korisnikForma['prezime'].$invalid}" type="text" name="prezime" id="prezime"
+                    class="form-control" ng-model="rctrl.noviKorisnik.prezime" required>
+            </div>
+            <div class="form-group">
+                <label for="brojLicne" style="color: white;">Broj licne karte:</label>
+                <input style="height: 50px; width: 200px;" ng-class="{'is-invalid': korisnikForma['brojLicne'].$invalid}" type="number" min="0" name="brojLicne" id="brojLicne"
+                    class="form-control" ng-model="rctrl.noviKorisnik.brojLicne" required>
+            </div>
+            <div class="form-group">
+                <label for="lozinka" style="color: white;">Lozinka:</label>
+                <input style="height: 50px; width: 200px;" ng-class="{'is-invalid': korisnikForma['lozinka'].$invalid}" type="password" name="lozinka"
+                    id="lozinka" class="form-control" ng-model="rctrl.noviKorisnik.lozinka" required>
+            </div>
+            <hr>
+            <div class="form-group">
+                <input type="submit" value="Registruj se" class="btn btn-primary" style="margin-bottom: 15px;">
+            </div>
+        </form></center>
+    </div>
+</div>
