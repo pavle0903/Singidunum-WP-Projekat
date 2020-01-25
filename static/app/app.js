@@ -6,7 +6,12 @@
 
     app.config(['$qProvider', function ($qProvider) {  
         $qProvider.errorOnUnhandledRejections(false);
-    }]);
+    }])
+    .filter('startFrom', function(){
+        return function(data, start){
+            return data.slice(start);
+        }
+    })
 
 
     app.config(["$stateProvider", "$urlRouterProvider", function($stateProvider, $urlRouterProvider) {

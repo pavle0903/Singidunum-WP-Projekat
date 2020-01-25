@@ -2,11 +2,14 @@
     // Dobavljanje postojeceg modula app.
     var app = angular.module("app");
 
-    app.controller("SmestajiCtrl", ["$http", "$scope", function($http, $scope) {
+    app.controller("SmestajiCtrl", ["$http", "$scope", "$log", function($http, $scope, $log) {
         var that = this;
 
         this.smestaji = [];
         this.svismestaji = [];
+
+        $scope.pageSize = 6;
+        $scope.currentPage = 1;
         
 
         this.dobaviSmestaje = function() {

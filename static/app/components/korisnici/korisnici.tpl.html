@@ -17,7 +17,7 @@
             </thead>
             <tbody>
 
-                <tr ng-repeat="k in kctrl.korisnici">
+                <tr ng-repeat="k in kctrl.korisnici | startFrom:(currentPage - 1) * pageSize | limitTo: pageSize">
 
                     <td>{{$index+1}}.</td>
 
@@ -25,8 +25,10 @@
                     <td>{{k["prezime"]}}</td>
                     <td>{{k["brojLicne"]}}</td>
                     <td><button class="btn btn-danger" ng-click="kctrl.ukloniKorisnika(k['id'])">Ukloni</button></td>
+                    <td><button class="btn btn-primary" ng-click="kctrl.izmeniKorisnika(k['id'])">Admin</button></td>
                 </tr>
             </tbody>
         </table>
     </div>
 </div>
+<pagination total-items="kctrl.korisnici.length" ng-model="currentPage" items-per-page="pageSize"></pagination>

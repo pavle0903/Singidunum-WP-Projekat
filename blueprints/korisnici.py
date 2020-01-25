@@ -49,3 +49,17 @@ def ukloni_korisnika(id_korisnika):
     cursor.execute("DELETE FROM korisnici WHERE id=%s", (id_korisnika,))
     db.commit()
     return "", 204 # Operacija je uspesna ali je telo odgovora prazno.
+
+@korisnici_blueprint.route("/akorisnik/<int:id_korisnika>", methods=["PUT"])
+def izmeni_korisnika(id_korisnika):
+    db = mysql.get_db()
+    cursor = db.cursor()
+    # data = flask.request.json
+    cursor.execute("SELECT * FROM korisnici where id=%s", (id_korisnika,))
+    korisnik = cursor.fetchone()
+    if korisnik["admin"] == 0:
+        cursor.execute("UPDATE korisnici SET admin = 1 WHERE id=%s", (id_korisnika,))
+    else:
+        cursor.execute("UPDATE korisnici SET admin = 0 WHERE id=%s", (id_korisnika,))
+    db.commit()
+    return "", 200
