@@ -84,3 +84,15 @@ def ukloni_rezervaciju(id_rezervacije):
     cursor.execute("UPDATE smestaj SET raspolozivost=raspolozivost+1 WHERE id=%s", smestajid["smestaj_id"]) #ne radi ti ovo, dovrsi
     db.commit()
     return "", 204 # Operacija je uspesna ali je telo odgovora prazno.
+
+@rezervacija_blueprint.route("/arezervacija/<int:id_rezervacije>", methods=["DELETE"])
+def aukloni_rezervaciju(id_rezervacije):
+    db = mysql.get_db()
+    cursor = db.cursor()
+    #data = flask.request.json
+    cursor.execute("SELECT * FROM rezervacije WHERE id=%s", id_rezervacije)
+    smestajid = cursor.fetchone()
+    cursor.execute("DELETE FROM rezervacije WHERE id=%s", (id_rezervacije,))
+    cursor.execute("UPDATE smestaj SET raspolozivost=raspolozivost+1 WHERE id=%s", smestajid["smestaj_id"]) #ne radi ti ovo, dovrsi
+    db.commit()
+    return "", 204 # Operacija je uspesna ali je telo odgovora prazno.

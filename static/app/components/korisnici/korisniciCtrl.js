@@ -30,10 +30,25 @@
                 console.log(reason);
             });
         }
+        this.dobaviAdmina = function(){
+            $http.get("api/getAdminId").then(
+                function(response){ 
+                    //console.log(response);
+                    if(response.data == 1){
+                        that.statusAdmina = "da";
+                    }
+                    else {
+                        that.statusAdmina = "ne";
+                    }
+                    console.log(response.data);
+                }
+            )
+        }
         this.izmeniKorisnika = function(id) {
             $http.put("api/akorisnik/" + id).then(function(response){
                 
                 console.log(response);
+                loginCtrl.logout();
                 that.dobaviKorisnike();
             },
             function(reason){

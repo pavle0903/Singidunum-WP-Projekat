@@ -20,6 +20,18 @@
                 console.log(reason);
             });
         }
+        this.ukloniRezervaciju = function(id) {
+
+            $http.delete("api/arezervacija/" + id).then(function(response){
+                alert("Uspesno ste otkazali rezervaciju!")
+                console.log(response);
+                that.dobaviRezervacije();
+            },
+            function(reason){
+                console.log(reason);
+                alert("Ne mozes!")
+            });
+        }
 
         this.dobaviRezervacije();
     }]);
