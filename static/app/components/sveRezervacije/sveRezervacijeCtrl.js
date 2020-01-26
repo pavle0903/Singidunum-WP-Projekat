@@ -13,6 +13,7 @@
                 console.log(result);
 
                 that.sveRezervacije = (result.data)
+                //window.location.reload()
 
 
             },

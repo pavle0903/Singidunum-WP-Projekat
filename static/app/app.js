@@ -20,9 +20,9 @@
         $stateProvider.state({
             name: "home", // Naziv stanja, mora biti zadat.
             url: "/", // URL kojim se prelazi na zadato stanje.
-            templateUrl: "app/components/registracija/registracija.tpl.html", // URL do sablona koji se koristi za zadato stanje.
-            controller: "RegistracijaCtrl", // Kontroler koji se vezuje za sablon u zadatom stanju.
-            controllerAs: "rctrl" // Naziv vezanog kontrolera.
+            templateUrl: "app/components/smestaji/smestaji.tpl.html", // URL do sablona koji se koristi za zadato stanje.
+            controller: "SmestajiCtrl", // Kontroler koji se vezuje za sablon u zadatom stanju.
+            controllerAs: "sctrl" // Naziv vezanog kontrolera.
         }).state({
             name: "dodavanjeSmestaja",
             url: "/SmestajForma",

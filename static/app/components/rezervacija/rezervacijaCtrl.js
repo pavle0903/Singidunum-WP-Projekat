@@ -7,11 +7,10 @@
     // pri cemu kljuc odogavara imenu parametra navdenom prilikom
     // konfigurisanja stanja ui router komponente.
     app.controller("RezervacijaCtrl", ["$http", "$state", "$scope", "$stateParams", function($http, $state, $scope, $stateParams) {
-
+        
         $scope.danasnji = new Date();
         $scope.startdt = new Date();
         $scope.enddt = new Date();
-        // $scope.medju = new Date(startdt);
         $scope.enddt.setDate($scope.startdt.getDate() + 2);
 
         $scope.opened = {
@@ -49,6 +48,7 @@
         this.sveRezervacije = [];
         this.korisnikID;
         this.smestaj = {};
+        this.odabranSmestaj =[];
         
         this.novaRezervacija = {
             "datumDolaska": $scope.startDate,
@@ -83,7 +83,10 @@
         this.Rezervacije = function() {
             $http.get("api/rezervacije").then(function(result){
                 console.log(result);
+                result.data["datumDolaska"] = new Date(this.novaRezervacija["datumDolaska"]);
+                result.data["datumOdlaska"] = new Date(this.novaRezervacija["datumOdlaska"]);
                 that.sveRezervacije = result.data;
+                console.log(sveRezervacije);
                 //console.log(rezervacije)
             },
             function(reason) {
@@ -104,6 +107,13 @@
       }
 
         this.dodajRezervaciju = function () {
+        
+
+            this.novaRezervacija["datumDolaska"] = new Date(this.novaRezervacija["datumDolaska"]);
+            this.novaRezervacija["datumOdlaska"] = new Date(this.novaRezervacija["datumOdlaska"]);
+
+
+
             if(this.novaRezervacija["datumDolaska"] > this.novaRezervacija["datumOdlaska"]){
                 alert("Greska u datumu odlaska!")
             }

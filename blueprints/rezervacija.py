@@ -1,6 +1,6 @@
 import flask
 from flask.blueprints import Blueprint
-from datetime import date
+from datetime import datetime
 
 from utils.db import mysql
 
@@ -43,10 +43,20 @@ def dobavi_rezervacije(id_korisnika):
 
 @rezervacija_blueprint.route("/rezervacije", methods=["GET"])
 def dobavi_sverezervacije():
+    db = mysql.get_db()
     cursor = mysql.get_db().cursor() 
+    
     cursor.execute("SELECT * FROM rezervacije") 
 
-    sveRezervacije = cursor.fetchall() 
+    sveRezervacije = cursor.fetchall()
+    danasnji = datetime.now()
+    for i in sveRezervacije:
+        if i["datumOdlaska"] <= danasnji:
+            cursor.execute("UPDATE smestaj SET raspolozivost=raspolozivost+1 WHERE id=%s", i["smestaj_id"])
+            cursor.execute("DELETE FROM rezervacije WHERE id=%s", i["id"]) #DODAJ DA NE MOZE ICI AKO JE MANJE OD NULA
+            db.commit()
+            print(i["datumOdlaska"], danasnji)
+
     return flask.jsonify(sveRezervacije) 
 
 @rezervacija_blueprint.route("/rezervacija", methods=["POST"])
@@ -56,12 +66,16 @@ def dodaj_rezervaciju():
     data = flask.request.json
     data["datumDolaska"] = data["datumDolaska"].rstrip("Z")
     data["datumOdlaska"] = data["datumOdlaska"].rstrip("Z")
+
+    # cursor.execute("SELECT datumDolaska, datumOdlaska FROM rezervacije WHERE smestaj_id=%s", data["smestaj_id"])
+    # rezervacijeSaId = cursor.fetchall()
+    # for i in rezervacijeSaId:
+    #     print(i)
+    # print(data["datumOdlaska"])
+
     
     cursor.execute("SELECT * FROM smestaj WHERE id=%s", data["smestaj_id"])
     smestaj = cursor.fetchone()
-    danasnji = date.today
-    if data["datumOdlaska"] == danasnji:
-        cursor.execute("UPDATE smestaj SET raspolozivost=raspolozivost+1 WHERE id=%s", data["smestaj_id"])
 
     if smestaj["raspolozivost"] > 0:
 
@@ -81,7 +95,7 @@ def ukloni_rezervaciju(id_rezervacije):
     cursor.execute("SELECT * FROM rezervacije WHERE id=%s", id_rezervacije)
     smestajid = cursor.fetchone()
     cursor.execute("DELETE FROM rezervacije WHERE id=%s", (id_rezervacije,))
-    cursor.execute("UPDATE smestaj SET raspolozivost=raspolozivost+1 WHERE id=%s", smestajid["smestaj_id"]) #ne radi ti ovo, dovrsi
+    cursor.execute("UPDATE smestaj SET raspolozivost=raspolozivost+1 WHERE id=%s", smestajid["smestaj_id"]) 
     db.commit()
     return "", 204 # Operacija je uspesna ali je telo odgovora prazno.
 
