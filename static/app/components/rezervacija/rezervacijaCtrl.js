@@ -7,7 +7,7 @@
     // pri cemu kljuc odogavara imenu parametra navdenom prilikom
     // konfigurisanja stanja ui router komponente.
     app.controller("RezervacijaCtrl", ["$http", "$state", "$scope", "$stateParams", function($http, $state, $scope, $stateParams) {
-        
+
         $scope.danasnji = new Date();
         $scope.startdt = new Date();
         $scope.enddt = new Date();
