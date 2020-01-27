@@ -17,7 +17,7 @@
             </thead>
             <tbody>
 
-                <tr ng-repeat="k in kctrl.korisnici | startFrom:(currentPage - 1) * pageSize | limitTo: pageSize">
+                <tr ng-repeat="k in kctrl.korisnici | startFrom:(currentPage - 1) * pageSize | limitTo: pageSize | orderBy: 'ime' : false">
 
                     <td>{{$index+1}}.</td>
 
