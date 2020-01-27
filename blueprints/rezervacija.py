@@ -64,16 +64,17 @@ def dodaj_rezervaciju():
     db = mysql.get_db() # Dobavljanje instance konekcije ka bazi.
     cursor = db.cursor() # Dobavljanje kursora.
     data = flask.request.json
-    data["datumDolaska"] = data["datumDolaska"].rstrip("Z")
-    data["datumOdlaska"] = data["datumOdlaska"].rstrip("Z")
-
-    # cursor.execute("SELECT datumDolaska, datumOdlaska FROM rezervacije WHERE smestaj_id=%s", data["smestaj_id"])
+    data["datumDolaska"] = data["datumDolaska"].split(".")[0]
+    data["datumOdlaska"] = data["datumOdlaska"].split(".")[0]
+    
+    # OVDE TREBA DA SE RADI PROVERU AKO DATUM ZA ODREDJENI SMESTAJ VEC POSTOJI, ALI IZ NEKOG RAZLOGA IF NE PRINTA IAKO JE TOTALNO ISTI DATUM
+    # cursor.execute("SELECT * FROM rezervacije WHERE smestaj_id=%s", data["smestaj_id"])
     # rezervacijeSaId = cursor.fetchall()
     # for i in rezervacijeSaId:
-    #     print(i)
-    # print(data["datumOdlaska"])
+    #     print(i["datumDolaska"], data["datumDolaska"].replace("T", " "))
+    #     if(i["datumDolaska"] == data["datumDolaska"].replace("T", " ") and i["datumOdlaska"] == data["datumOdlaska"].replace("T", " ")):
+    #         print("Vec postoji rezervacija za odredjeni datum")
 
-    
     cursor.execute("SELECT * FROM smestaj WHERE id=%s", data["smestaj_id"])
     smestaj = cursor.fetchone()
 

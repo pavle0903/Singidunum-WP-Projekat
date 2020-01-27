@@ -109,8 +109,8 @@
         this.dodajRezervaciju = function () {
         
 
-            this.novaRezervacija["datumDolaska"] = new Date(this.novaRezervacija["datumDolaska"]);
-            this.novaRezervacija["datumOdlaska"] = new Date(this.novaRezervacija["datumOdlaska"]);
+            // this.novaRezervacija["datumDolaska"] = new Date(this.novaRezervacija["datumDolaska"]);
+            // this.novaRezervacija["datumOdlaska"] = new Date(this.novaRezervacija["datumOdlaska"]);
 
 
 
